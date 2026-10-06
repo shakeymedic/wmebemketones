@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ketoacidosis in the ED: A Guide for UK Clinicians</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
+        }
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .header-icon {
+            width: 50px;
+            height: 50px;
+        }
+        .logo {
+            max-width: 150px;
+            margin-bottom: 1rem;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+        .tab-button {
+            transition: background-color 0.3s, color 0.3s;
+            border-radius: 8px;
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .tab-button.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .tab-button:not(.active) {
+            background-color: #e5e7eb;
+            color: #374151;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.25em 0.6em;
+            font-size: 0.75em;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 0.375rem;
+        }
+        .section-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8">
+
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <div class="flex justify-center items-center">
+                <img src="https://i.imgur.com/09eFLTO.png" alt="WMEBEM Logo" class="logo">
+            </div>
+            <h1 class="text-3xl md:text-4xl font-bold text-blue-600">Ketoacidosis in the Emergency Department</h1>
+            <p class="text-lg text-slate-600 mt-2">A Practical Infographic for UK Emergency Clinicians</p>
+        </header>
+
+        <!-- Intro to Ketones -->
+        <div class="card p-6 md:p-8 mb-8">
+            <div class="flex items-center mb-4">
+                 <svg class="header-icon text-slate-500 mr-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" /></svg>
+                <h2 class="text-2xl font-bold text-slate-800">Understanding Ketone Bodies</h2>
+            </div>
+            <p class="mb-6 text-slate-600">Ketones are produced when the body metabolises fat for energy. There are three main types, and how we measure them matters.</p>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div>
+                    <h3 class="font-semibold text-lg mb-2">The Ketones</h3>
+                    <ul class="list-disc list-inside space-y-1 text-slate-700">
+                        <li><strong>Beta-hydroxybutyrate (BOHB):</strong> The most abundant ketone in ketoacidosis.</li>
+                        <li><strong>Acetoacetate (AcAc):</strong> The next most common.</li>
+                        <li><strong>Acetone:</strong> Less abundant, responsible for the 'fruity' breath smell.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-lg mb-2">Measurement Methods</h3>
+                    <ul class="list-disc list-inside space-y-1 text-slate-700">
+                        <li><strong class="text-blue-600">Capillary (Point-of-Care):</strong> Measures BOHB. Preferred method for ED diagnosis and monitoring.</li>
+                        <li><strong>Laboratory (Serum):</strong> Measures BOHB. Gold standard but slower turnaround.</li>
+                        <li><strong>Urine Dipstick:</strong> Measures Acetoacetate only. Can be falsely reassuring as it misses the main ketone (BOHB). Not recommended for DKA diagnosis or monitoring.</li>
+                    </ul>
+                </div>
+                 <div>
+                    <h3 class="font-semibold text-lg mb-2">Clinical Pearl</h3>
+                    <div class="p-3 bg-blue-50 border border-blue-200 rounded-lg text-blue-800">
+                        Always trust a capillary or lab ketone reading over a urine dipstick. A negative urine test does not exclude significant ketoacidosis.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs Navigation -->
+        <div class="mb-8 flex flex-wrap justify-center gap-2">
+            <button class="tab-button active" onclick="showTab('dka')">Diabetic Ketoacidosis (DKA)</button>
+            <button class="tab-button" onclick="showTab('aka')">Alcoholic Ketoacidosis (AKA)</button>
+            <button class="tab-button" onclick="showTab('sk')">Starvation Ketosis</button>
+            <button class="tab-button" onclick="showTab('other')">eDKA & Other Causes</button>
+            <button class="tab-button" onclick="showTab('summary')">Comparison Summary</button>
+        </div>
+
+        <!-- DKA Content -->
+        <div id="dka" class="tab-content active">
+            <div class="card p-6 md:p-8">
+                <div class="flex items-center mb-4">
+                    <svg class="header-icon text-red-500 mr-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.362-3.797z" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 9.75h.008v.008H12V9.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM12 3v.01M12 21v-.01M18.6 18.6l.01-.01M5.4 5.4l-.01.01M21 12h-.01M3 12H2.99" /></svg>
+                    <h2 class="text-2xl font-bold text-red-600">Diabetic Ketoacidosis (DKA)</h2>
+                </div>
+                <p class="mb-6 text-slate-600">A life-threatening complication of diabetes (usually Type 1), characterised by a triad of hyperglycaemia, ketonaemia, and acidaemia.</p>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Column 1: Assessment -->
+                    <div class="space-y-4">
+                        <h3 class="flex items-center text-xl font-semibold text-slate-800 border-b-2 border-red-200 pb-2">
+                            <svg class="section-icon text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+                            Assessment
+                        </h3>
+                        <ul class="list-disc list-inside space-y-2 text-slate-700">
+                            <li>Polyuria, polydipsia, weight loss</li>
+                            <li>Nausea, vomiting, abdominal pain</li>
+                            <li>Kussmaul breathing (deep, sighing)</li>
+                            <li>Pear-drop smell on breath (ketones)</li>
+                            <li>Dehydration signs (tachycardia, hypotension)</li>
+                            <li>Altered mental status, confusion, coma</li>
+                            <li>Look for precipitants (infection, missed insulin, MI)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 2: Diagnosis -->
+                    <div class="space-y-4">
+                        <h3 class="flex items-center text-xl font-semibold text-slate-800 border-b-2 border-red-200 pb-2">
+                           <svg class="section-icon text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m3.75 9v6m-3.75-6v6m-3.75-6v6M3 16.5v-1.5a3.375 3.375 0 013.375-3.375h1.5A1.125 1.125 0 009 12.875v1.5m-6.75 4.5h18" /></svg>
+                            Diagnosis (The Triad)
+                        </h3>
+                         <ul class="list-disc list-inside space-y-2 text-slate-700">
+                            <li><strong>Capillary Blood Glucose > 11 mmol/L</strong> (or known diabetes)</li>
+                            <li><strong>Capillary/Blood Ketones > 3 mmol/L</strong></li>
+                            <li><strong>Bicarbonate < 15 mmol/L</strong> and/or <strong>Venous pH < 7.3</strong></li>
+                        </ul>
+                         <p class="text-sm font-semibold text-red-700 bg-red-100 p-2 rounded-lg mt-4"><strong>NB:</strong> Euglycaemic DKA (eDKA) can occur with glucose < 11 mmol/L, especially in patients on SGLT-2 inhibitors.</p>
+                        <p class="text-sm font-semibold text-red-700 bg-red-100 p-2 rounded-lg">Severity: Mild (pH 7.2-7.29), Moderate (pH 7.1-7.19), Severe (pH < 7.1)</p>
+                    </div>
+
+                    <!-- Column 3: Treatment -->
+                    <div class="space-y-4">
+                        <h3 class="flex items-center text-xl font-semibold text-slate-800 border-b-2 border-red-200 pb-2">
+                             <svg class="section-icon text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg>
+                            Treatment (Follow Local Trust Guidelines)
+                        </h3>
+                        <ol class="list-decimal list-inside space-y-2 text-slate-700">
+                            <li><strong>Fluid Resuscitation:</strong> 0.9% Saline. 1L stat, then follow protocol (e.g., 1L over 2h, 1L over 4h).</li>
+                            <li><strong>Fixed Rate Insulin Infusion (FRII):</strong> 0.1 units/kg/hour. **Do not stop long-acting insulin.**</li>
+                            <li><strong>Potassium Replacement:</strong> Crucial. Add KCl to fluids based on K+ level. Start early unless K+ > 5.5.</li>
+                            <li><strong>Monitor Closely:</strong> Hourly capillary ketones & glucose. VBG at 1h, 2h, then 2-4 hourly.</li>
+                            <li><strong>Consider HDU/ITU if severe:</strong> pH < 7.1, GCS < 12, persistent hypotension.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AKA Content -->
+        <div id="aka" class="tab-content">
+            <div class="card p-6 md:p-8">
+                 <div class="flex items-center mb-4">
+                     <svg class="header-icon text-purple-500 mr-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 7.5l.415-.207a.75.75 0 011.085.67V10.5m0 0h6m-6 0a.75.75 0 00.75.75h4.5a.75.75 0 00.75-.75V8.25a.75.75 0 00-.75-.75h-4.5a.75.75 0 00-.75.75v2.25m0 0l-3.25-3.25a.75.75 0 00-1.06 1.06l3.25 3.25m8.25 2.25l-3.25 3.25a.75.75 0 01-1.06-1.06l3.25-3.25m0 0l3.25 3.25a.75.75 0 001.06-1.06l-3.25-3.25m-3.25-3.25l3.25-3.25a.75.75 0 00-1.06-1.06l-3.25 3.25" /></svg>
+                    <h2 class="text-2xl font-bold text-purple-600">Alcoholic Ketoacidosis (AKA)</h2>
+                </div>
+                <p class="mb-6 text-slate-600">Occurs in patients with chronic alcohol use, typically after a binge followed by a period of poor oral intake ("feed-fast" cycle). Dehydration and depleted glycogen stores lead to ketosis.</p>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Column 1: Assessment -->
+                    <div class="space-y-4">
+                        <h3 class="flex items-center text-xl font-semibold text-slate-800 border-b-2 border-purple-200 pb-2">
+                           <svg class="section-icon text-purple-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+                            Assessment
+                        </h3>
+                        <ul class="list-disc list-inside space-y-2 text-slate-700">
+                            <li>Recent alcohol binge, now stopped</li>
+                            <li>Anorexia, nausea, vomiting, epigastric pain</li>
+                            <li>May present similarly to DKA or pancreatitis</li>
+                            <li>Tachycardia, tachypnoea, dehydration</li>
+                            <li>Often co-existent gastritis, pancreatitis, or liver disease</li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 2: Diagnosis -->
+                    <div class="space-y-4">
+                        <h3 class="flex items-center text-xl font-semibold text-slate-800 border-b-2 border-purple-200 pb-2">
+                           <svg class="section-icon text-purple-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m3.75 9v6m-3.75-6v6m-3.75-6v6M3 16.5v-1.5a3.375 3.375 0 013.375-3.375h1.5A1.125 1.125 0 009 12.875v1.5m-6.75 4.5h18" /></svg>
+                            Diagnosis
+                        </h3>
+                        <ul class="list-disc list-inside space-y-2 text-slate-700">
+                            <li><strong>Metabolic acidosis with raised anion gap</strong></li>
+                            <li><strong>Positive serum/urine ketones</strong></li>
+                            <li><strong>Glucose is variable:</strong> can be low, normal, or mildly elevated (rarely >15 mmol/L).</li>
+                            <li>Alcohol level may be low or undetectable.</li>
+                            <li>Lactate may be mildly raised.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 3: Treatment -->
+                    <div class="space-y-4">
+                        <h3 class="flex items-center text-xl font-semibold text-slate-800 border-b-2 border-purple-200 pb-2">
+                            <svg class="section-icon text-purple-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg>
+                            Treatment
+                        </h3>
+                        <ol class="list-decimal list-inside space-y-2 text-slate-700">
+                            <li><strong>Thiamine:</strong> Give Pabrinex (or IV Thiamine) **BEFORE** any glucose-containing fluids.</li>
+                            <li><strong>Fluid & Glucose:</strong> Start with 0.9% Saline. Once haemodynamically stable, switch to Dextrose 5% with added KCl. Dextrose stimulates endogenous insulin release, which switches off ketogenesis.</li>
+                            <li><strong>Electrolyte Replacement:</strong> Correct hypokalaemia, hypomagnesaemia, and hypophosphataemia.</li>
+                            <li><strong>Anti-emetics & supportive care.</strong></li>
+                            <li>**Insulin is NOT usually required.**</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Starvation Ketosis Content -->
+        <div id="sk" class="tab-content">
+            <div class="card p-6 md:p-8">
+                 <div class="flex items-center mb-4">
+                    <svg class="header-icon text-green-500 mr-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /></svg>
+                    <h2 class="text-2xl font-bold text-green-600">Starvation Ketosis</h2>
+                </div>
+                <p class="mb-6 text-slate-600">A physiological response to prolonged fasting or very low carbohydrate intake. The body switches to fat metabolism, producing ketones as an alternative fuel source. Not typically associated with severe acidosis.</p>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Column 1: Assessment -->
+                    <div class="space-y-4">
+                        <h3 class="flex items-center text-xl font-semibold text-slate-800 border-b-2 border-green-200 pb-2">
+                           <svg class="section-icon text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+                            Assessment
+                        </h3>
+                        <ul class="list-disc list-inside space-y-2 text-slate-700">
+                            <li>History of poor oral intake, fasting, fad diets (e.g., ketogenic), or vomiting (e.g., hyperemesis gravidarum).</li>
+                            <li>General malaise, weakness, lightheadedness.</li>
+                            <li>Symptoms are usually mild compared to DKA/AKA.</li>
+                            <li>Often an incidental finding on bloods.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 2: Diagnosis -->
+                    <div class="space-y-4">
+                        <h3 class="flex items-center text-xl font-semibold text-slate-800 border-b-2 border-green-200 pb-2">
+                           <svg class="section-icon text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m3.75 9v6m-3.75-6v6m-3.75-6v6M3 16.5v-1.5a3.375 3.375 0 013.375-3.375h1.5A1.125 1.125 0 009 12.875v1.5m-6.75 4.5h18" /></svg>
+                            Diagnosis
+                        </h3>
+                        <ul class="list-disc list-inside space-y-2 text-slate-700">
+                            <li><strong>Mild ketonaemia</strong> (ketones often < 3 mmol/L).</li>
+                            <li><strong>pH is usually normal or near-normal (> 7.3).</strong></li>
+                            <li><strong>Bicarbonate is often normal or only slightly low (> 18 mmol/L).</strong></li>
+                            <li>Glucose is typically low or low-normal.</li>
+                            <li>Anion gap is normal or only slightly elevated.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 3: Treatment -->
+                    <div class="space-y-4">
+                        <h3 class="flex items-center text-xl font-semibold text-slate-800 border-b-2 border-green-200 pb-2">
+                            <svg class="section-icon text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg>
+                            Treatment
+                        </h3>
+                         <ol class="list-decimal list-inside space-y-2 text-slate-700">
+                            <li><strong>Restore Oral Intake:</strong> Encourage carbohydrate-containing food and drink.</li>
+                            <li><strong>IV Fluids if needed:</strong> If unable to tolerate oral intake, use Dextrose-containing fluids (e.g., Dextrose 5% or Dextrose Saline).</li>
+                            <li><strong>Treat underlying cause:</strong> e.g., anti-emetics for vomiting.</li>
+                            <li><strong>Insulin is not required.</strong></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- eDKA and Other Causes -->
+        <div id="other" class="tab-content">
+            <div class="card p-6 md:p-8">
+                 <div class="flex items-center mb-4">
+                    <svg class="header-icon text-orange-500 mr-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.008v.008H12v-.008z" /></svg>
+                    <h2 class="text-2xl font-bold text-orange-600">eDKA & Other Ketone Causes</h2>
+                </div>
+                <p class="mb-6 text-slate-600">While DKA, AKA, and starvation account for most cases, it's crucial to be aware of important mimics and variants.</p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-semibold text-xl mb-2 text-slate-800">Euglycaemic DKA (eDKA)</h3>
+                        <div class="p-4 bg-orange-50 border border-orange-200 rounded-lg space-y-3">
+                             <p class="text-slate-700">A dangerous DKA variant where blood glucose is not significantly elevated (often < 14 mmol/L), meeting other criteria for DKA (ketones >3, pH <7.3).</p>
+                             <h4 class="font-semibold">Key Triggers:</h4>
+                             <ul class="list-disc list-inside space-y-1 text-slate-700">
+                                 <li><strong>SGLT-2 Inhibitors:</strong> (e.g., Dapagliflozin, Empagliflozin). These drugs cause glycosuria, masking hyperglycaemia.</li>
+                                 <li>Pregnancy</li>
+                                 <li>Reduced carbohydrate intake or fasting</li>
+                                 <li>Cocaine use</li>
+                             </ul>
+                             <p class="font-bold text-orange-800"><strong>Clinical Action:</strong> Any patient on an SGLT-2 inhibitor who is unwell (nausea, vomiting, abdominal pain) needs a capillary ketone check, regardless of their blood glucose level.</p>
+                        </div>
+                    </div>
+                    <div>
+                         <h3 class="font-semibold text-xl mb-2 text-slate-800">Other Causes of Ketosis</h3>
+                         <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg space-y-3">
+                             <p class="text-slate-700">Consider these in the acidotic patient when the cause is unclear:</p>
+                              <ul class="list-disc list-inside space-y-1 text-slate-700">
+                                 <li><strong>Salicylate Overdose:</strong> Causes a mixed respiratory alkalosis and metabolic acidosis. Ketones can be present.</li>
+                                 <li><strong>Isopropanol Ingestion:</strong> Isopropanol is metabolised to acetone, leading to ketosis without acidosis.</li>
+                                  <li><strong>Inborn Errors of Metabolism:</strong> A rare consideration, primarily in children.</li>
+                             </ul>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Table -->
+        <div id="summary" class="tab-content">
+            <div class="card p-6 md:p-8">
+                <div class="flex items-center mb-4">
+                    <svg class="header-icon text-blue-500 mr-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75c0-.231-.035-.454-.1-.664M6.75 7.5H18a2.25 2.25 0 012.25 2.25v9a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18.75V9.75c0-1.381 1.12-2.5 2.5-2.5h1.25" /></svg>
+                    <h2 class="text-2xl font-bold text-blue-600">Ketoacidosis: At-a-Glance Comparison</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100">
+                                <th class="p-3 font-semibold text-slate-700 border-b-2 border-slate-200">Feature</th>
+                                <th class="p-3 font-semibold text-red-600 border-b-2 border-slate-200">DKA</th>
+                                <th class="p-3 font-semibold text-purple-600 border-b-2 border-slate-200">AKA</th>
+                                <th class="p-3 font-semibold text-green-600 border-b-2 border-slate-200">Starvation Ketosis</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr>
+                                <td class="p-3 font-medium">Typical Patient</td>
+                                <td class="p-3">Type 1 Diabetes (often young)</td>
+                                <td class="p-3">Chronic alcohol misuse</td>
+                                <td class="p-3">Poor oral intake, fasting, pregnant</td>
+                            </tr>
+                             <tr>
+                                <td class="p-3 font-medium">Glucose</td>
+                                <td class="p-3"><span class="badge bg-red-100 text-red-800">High (>11) or Normal in eDKA</span></td>
+                                <td class="p-3"><span class="badge bg-purple-100 text-purple-800">Low / Normal / Mildly High</span></td>
+                                <td class="p-3"><span class="badge bg-green-100 text-green-800">Low / Normal</span></td>
+                            </tr>
+                             <tr>
+                                <td class="p-3 font-medium">Ketones</td>
+                                <td class="p-3"><span class="badge bg-red-100 text-red-800">High (>3.0)</span></td>
+                                <td class="p-3"><span class="badge bg-purple-100 text-purple-800">High</span></td>
+                                <td class="p-3"><span class="badge bg-green-100 text-green-800">Mildly Raised</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium">pH</td>
+                                <td class="p-3"><span class="badge bg-red-100 text-red-800">Low (<7.3)</span></td>
+                                <td class="p-3"><span class="badge bg-purple-100 text-purple-800">Low</span></td>
+                                <td class="p-3"><span class="badge bg-green-100 text-green-800">Normal / Near-normal</span></td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-medium">Bicarbonate</td>
+                                <td class="p-3"><span class="badge bg-red-100 text-red-800">Low (<15)</span></td>
+                                <td class="p-3"><span class="badge bg-purple-100 text-purple-800">Low</span></td>
+                                <td class="p-3"><span class="badge bg-green-100 text-green-800">Normal / Mildly Low</span></td>
+                            </tr>
+                             <tr>
+                                <td class="p-3 font-medium">Primary Treatment</td>
+                                <td class="p-3">IV Fluids + Insulin (FRII)</td>
+                                <td class="p-3">IV Thiamine + Dextrose Fluids</td>
+                                <td class="p-3">Oral/IV Carbohydrates</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center mt-8 text-sm text-slate-500 space-y-2">
+            <p>This infographic is intended as an educational aid and does not replace local trust guidelines or clinical judgement. Always consult your local protocols for the management of ketoacidosis.</p>
+            <p>Created by Dr Jake Turner for West Midlands Evidence Based Emergency Medicine Ltd.</p>
+            <div>
+                <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" rel="license" class="underline hover:text-blue-600">
+                    This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+                </a>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            // Hide all tab content
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Deactivate all tab buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show the selected tab content
+            document.getElementById(tabId).classList.add('active');
+
+            // Activate the selected tab button
+            const activeButton = document.querySelector(`.tab-button[onclick="showTab('${tabId}')"]`);
+            activeButton.classList.add('active');
+        }
+    </script>
+</body>
+</html>
+
